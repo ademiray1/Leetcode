@@ -1,0 +1,19 @@
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        
+        new_list = []
+       # print(l1.val)
+        head_ptr = temp_ptr = ListNode()
+        
+        while l1 or l2:
+            if l1 and (not l2 or l2.val >= l1.val):
+                temp_ptr.next = ListNode(l1.val)
+                l1 = l1.next
+            else:
+                temp_ptr.next = ListNode(l2.val)
+                l2= l2.next
+                
+            temp_ptr = temp_ptr.next
+        
+        return head_ptr.next     
+                

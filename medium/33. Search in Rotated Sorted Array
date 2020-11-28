@@ -1,0 +1,86 @@
+
+#Medium
+#Search in Rotated sorted Array Facebook Microsoft Bloomberg Uber
+
+#i.e [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]
+
+#you are given a target value to search. If found in the array return the index, otherwise return -1.
+
+#You may assume no duplicate exists in the array
+
+#Solution 1: Binary Search O(log n); O(1)
+
+
+def search(arr, target):
+    
+    
+    if not arr and len(arr) == 0:
+            
+        return -1
+    
+    ## 
+    right = len(arr)-1
+        
+    left = 0
+    
+    
+    while left < right:
+        
+        mid = int(left + (right - left)/2)
+    #    print(mid) 
+     #   print(left)
+       
+        #to get 0 ,1 , 2 part
+        if arr[mid]> arr[right]: # this is peculiar(weird strange unusual) thats kind of weird situation
+            
+            left = mid + 1 # so we can start to narrow down our search space by setting the boundary to left equals midpoint + 1
+            
+        else:
+            
+            right = mid # You bring right to mid becuase its the normal case
+        
+            # loop will break when left is in the smallest index
+         
+            
+    # now we do binary search
+    start = left # we start at the smallest index
+    left = 0
+    right = len(arr) - 1
+    
+    
+     
+    if target >= arr[start] and target <= arr[right]:
+        
+        left = start
+        
+    else:
+        
+        right = start   # sola cektin array i [4,5,6,7,0] kismina bakiyorsun
+    
+    #print(left)
+    #print(right)
+    while left <= right: # now we do regular binary search
+        
+        mid = int(left + (right - left )/2)
+        
+        if arr[mid] == target:
+            
+            return mid
+        
+        elif arr[mid] < target:
+            
+            left = mid + 1
+            
+        else:
+            
+            right = mid - 1
+            
+    return -1
+        
+    
+arr = [5,1,3]
+target = 3
+
+print(search(arr, target))
+
+
